@@ -30,3 +30,8 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+#SKILLS
+skills-lock.json
+.agents/
+.claude/
