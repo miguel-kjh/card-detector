@@ -78,3 +78,8 @@ Run name format: `{model}_{classifier}_{date}` for sklearn; `{model}_lr{lr}_bs{b
 ### Data loading
 
 `CardsDataset` reads `data/cards.csv` (columns: `filepaths`, `labels`, `data set`). Images at `data/<split>/<class>/`. Corrupted rows filtered via `os.path.exists`. Train uses RandomHorizontalFlip + RandomRotation(10); val/test use ImageNet normalization only.
+
+### Analysis scripts
+
+- **`ensemble.py`**: Stacking ensemble — loads a `resnet18_finetune` checkpoint, extracts 512-dim backbone features, trains SVM + RandomForest on them, then combines all three models (average + meta-learner) and evaluates on test. Hardcodes `CHECKPOINT` path at the top; outputs to `runs/ensemble_stacking/`.
+- **`confusion_matrix.py`**: Generates a confusion matrix for the best run (by test accuracy) or a specific `--run` name. Flags: `--run`, `--data_dir`, `--runs_dir`.
